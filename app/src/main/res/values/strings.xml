@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">BitcoinTracker</string>
     <string name="welcome">Welcome</string>
+    <string name="coin_icon">Coin icon</string>
+
 
 </resources>

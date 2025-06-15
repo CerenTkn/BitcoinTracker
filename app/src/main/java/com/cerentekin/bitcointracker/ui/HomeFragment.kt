@@ -7,19 +7,28 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cerentekin.bitcointracker.R
+import com.cerentekin.bitcointracker.VM.CoinVM
 import com.cerentekin.bitcointracker.databinding.FragmentHomeBinding
+import com.cerentekin.bitcointracker.ui.adapter.CoinAdapter
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val firebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val viewModel: CoinVM by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +39,6 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.tvWelcome.text = "Hoş geldin, Bitcoin takip ekranına yönlendirildin!"
         return binding.root
     }
 
@@ -63,6 +71,24 @@ class HomeFragment : Fragment() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.rvCoins.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.fetchCoins()
+
+        viewModel.coinList.observe(viewLifecycleOwner) { coins ->
+            binding.rvCoins.adapter = CoinAdapter(coins)
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { errorMsg ->
+            errorMsg?.let {
+                Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
