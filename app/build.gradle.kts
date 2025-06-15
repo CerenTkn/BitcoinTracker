@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.hilt.android)
     id("org.jetbrains.kotlin.kapt")
     id("com.google.gms.google-services")
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -73,9 +76,11 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:2.48")
 
     //Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-auth")
+    // Firebase (uyumlu sürümler)
+    implementation("com.google.firebase:firebase-analytics:21.5.0")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.firebase:firebase-firestore:24.9.0")
+
 
     implementation("com.squareup:javapoet:1.13.0")
 

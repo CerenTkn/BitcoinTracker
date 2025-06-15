@@ -19,7 +19,12 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.cerentekin.bitcointracker.ui.HomeFragment"
-        android:label="Home" />
+        android:label="Home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_coinDetailFragment"
+            app:destination="@id/coinDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
@@ -29,5 +34,17 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/coinDetailFragment"
+        android:name="com.cerentekin.bitcointracker.ui.CoinDetailFragment"
+        android:label="Coin Detail">
+
+        <argument
+            android:name="coin"
+            app:argType="com.cerentekin.bitcointracker.data.model.Coin"
+            app:nullable="false" />
+    </fragment>
+
 
 </navigation>

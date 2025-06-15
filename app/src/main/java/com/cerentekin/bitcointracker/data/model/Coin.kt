@@ -1,7 +1,10 @@
 package com.cerentekin.bitcointracker.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Coin(
     val id: String,
     val symbol: String,
@@ -14,5 +17,5 @@ data class Coin(
     val marketCap: Long,
     @SerializedName("price_change_percentage_24h")
     val priceChangePercentage24h: Double
-)
+) : Parcelable
 

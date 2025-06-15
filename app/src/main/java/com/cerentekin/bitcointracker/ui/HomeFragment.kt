@@ -82,8 +82,12 @@ class HomeFragment : Fragment() {
         viewModel.fetchCoins()
 
         viewModel.coinList.observe(viewLifecycleOwner) { coins ->
-            binding.rvCoins.adapter = CoinAdapter(coins)
+            binding.rvCoins.adapter = CoinAdapter(coins) { selectedCoin ->
+                val action = HomeFragmentDirections.actionHomeFragmentToCoinDetailFragment(selectedCoin)
+                findNavController().navigate(action)
+            }
         }
+
 
         viewModel.error.observe(viewLifecycleOwner) { errorMsg ->
             errorMsg?.let {
