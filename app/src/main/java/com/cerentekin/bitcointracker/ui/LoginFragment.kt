@@ -33,6 +33,10 @@ class LoginFragment : Fragment() {
             this?.btnLogin?.setOnClickListener {
                 val email = binding!!.etEmail.text.toString()
                 val password = binding!!.etPassword.text.toString()
+                if (email.isBlank() || password.isBlank()) {
+                    Toast.makeText(requireContext(), "Email and password can't be empty", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 viewModel.login(email, password)
             }
             this?.btnRegister?.setOnClickListener {
