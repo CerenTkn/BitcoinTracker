@@ -25,12 +25,17 @@ class LoginFragment : Fragment() {
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        binding!!.btnLogin.setOnClickListener {
-            val email = binding!!.etEmail.text.toString()
-            val password = binding!!.etPassword.text.toString()
-            viewModel.login(email, password)
-        }
+        with(binding) {
+            this?.btnLogin?.setOnClickListener {
+                val email = binding!!.etEmail.text.toString()
+                val password = binding!!.etPassword.text.toString()
+                viewModel.login(email, password)
+            }
+            this?.btnRegister?.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
 
+        }
         observeLoginResult()
 
         return binding!!.root
