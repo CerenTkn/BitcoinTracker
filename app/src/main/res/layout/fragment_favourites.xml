@@ -8,7 +8,7 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/orange"
         android:title="Favourites"
         android:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"

@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/orange"
         android:title="Bitcoin Tracker"
         app:titleTextColor="@color/white"
         app:navigationIcon="@drawable/back_button"
