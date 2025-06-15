@@ -6,16 +6,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Coin(
-    val id: String,
-    val symbol: String,
-    val name: String,
+    var id: String = "",
+    var symbol: String = "",
+    var name: String = "",
     @SerializedName("image")
-    val image: String,
+    var image: String = "",
     @SerializedName("current_price")
-    val currentPrice: Double,
+    var currentPrice: Double = 0.0,
     @SerializedName("market_cap")
-    val marketCap: Long,
+    var marketCap: Long = 0L,
     @SerializedName("price_change_percentage_24h")
-    val priceChangePercentage24h: Double
+    var priceChangePercentage24h: Double = 0.0
 ) : Parcelable
-

@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.cerentekin.bitcointracker.R
 import com.cerentekin.bitcointracker.VM.CoinVM
@@ -101,6 +104,14 @@ class CoinDetailFragment : Fragment() {
         coinId = arguments?.getString("coinId")
         coinId?.let { viewModel.getCoinDetail(it) }
 
+        val toolbar = binding.toolbar
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+        setHasOptionsMenu(true)
         observeDetail()
 
         binding.etRefreshInterval.setOnEditorActionListener { _, _, _ ->
@@ -113,11 +124,17 @@ class CoinDetailFragment : Fragment() {
             }
             false
         }
-
-        binding.btnFavourite.setOnClickListener {
-            Toast.makeText(requireContext(), "Added to favourites (TODO)", Toast.LENGTH_SHORT).show()
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().navigateUp()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
+
 
     private fun observeDetail() {
         viewModel.coinDetail.observe(viewLifecycleOwner) { coin ->
@@ -149,5 +166,7 @@ class CoinDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+
     }
 }
