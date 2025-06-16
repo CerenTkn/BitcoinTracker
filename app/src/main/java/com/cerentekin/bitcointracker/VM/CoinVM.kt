@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.cerentekin.bitcointracker.data.model.Coin
 import com.cerentekin.bitcointracker.data.model.CoinDetail
 import com.cerentekin.bitcointracker.data.repository.CoinRepository
+import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,9 +36,12 @@ class CoinVM @Inject constructor(
 
     fun getCoinDetail(id: String) {
         viewModelScope.launch {
+
             try {
                 val result = repository.getCoinById(id)
                 _coinDetail.postValue(result)
+                Log.d("CoinVM", "Response JSON: ${Gson().toJson(result)}")
+
             } catch (e: Exception) {
                 Log.e("CoinVM", "Coin detail error: ${e.localizedMessage}")
             }
