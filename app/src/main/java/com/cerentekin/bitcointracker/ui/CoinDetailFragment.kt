@@ -84,7 +84,7 @@ class CoinDetailFragment : Fragment() {
             "name" to coin.name,
             "symbol" to coin.symbol,
             "image" to coin.image,
-            "price" to coin.currentPrice
+            "current_price" to coin.currentPrice
         )
 
         db.collection("users")
