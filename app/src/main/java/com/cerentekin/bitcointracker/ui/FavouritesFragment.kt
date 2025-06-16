@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cerentekin.bitcointracker.R
 import com.cerentekin.bitcointracker.VM.FavouritesVM
 import com.cerentekin.bitcointracker.databinding.FragmentFavouritesBinding
 import com.cerentekin.bitcointracker.ui.adapter.CoinAdapter
@@ -29,6 +31,8 @@ class FavouritesFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.orange)
+
         return binding.root
     }
 

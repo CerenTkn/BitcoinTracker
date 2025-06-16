@@ -117,9 +117,11 @@ class HomeFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
-
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
