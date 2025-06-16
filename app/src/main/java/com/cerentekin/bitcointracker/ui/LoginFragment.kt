@@ -52,7 +52,6 @@ class LoginFragment : Fragment() {
     private fun observeLoginResult() {
         viewModel.loginResult.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(requireContext(), "Giriş başarılı", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             } else {
                 Toast.makeText(requireContext(), "Hatalı giriş", Toast.LENGTH_SHORT).show()

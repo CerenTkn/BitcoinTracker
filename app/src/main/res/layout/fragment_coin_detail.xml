@@ -16,7 +16,6 @@
         app:titleTextColor="@color/white"
         app:navigationIcon="@drawable/back_button" />
 
-    <!-- Main Content Scrollable -->
     <ScrollView
         android:id="@+id/detailScrollView"
         android:layout_width="match_parent"

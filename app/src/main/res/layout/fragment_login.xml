@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <!-- Logo -->
-
-    <!-- Form Container -->
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="300dp"

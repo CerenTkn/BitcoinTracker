@@ -35,6 +35,10 @@ class RegisterFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
+            if (email.isBlank() || password.isBlank()) {
+                Toast.makeText(requireContext(), "Email and password can't be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             viewModel.register(email, password)
         }
 
@@ -46,10 +50,10 @@ class RegisterFragment : Fragment() {
     private fun observeAuthResult() {
         viewModel.authResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess {
-                Toast.makeText(context, "Kayıt başarılı", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             }.onFailure {
-                Toast.makeText(context, "Kayıt başarısız: ${it.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Registration failed: ${it.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
